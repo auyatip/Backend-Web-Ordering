@@ -34,3 +34,26 @@ exports.addProductController = async (req, res) => {
     console.log(error);
   }
 };
+
+exports.updateProductController = async (req, res) => {
+  try {
+    const { title, description, price, img, review, category } = req.body;
+    const { id } = req.params;
+    const product = await Product.findByIdAndUpdate(
+      id,
+      { ...req.body },
+      { new: true }
+    );
+    return res.status(200).json({
+      success: true,
+      message: "Product updated !",
+      product,
+    });
+  } catch (error) {
+    return res.status(400).json({
+      success: false,
+      message: "erro : update blog",
+      error,
+    });
+  }
+};

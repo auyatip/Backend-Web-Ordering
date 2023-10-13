@@ -3,6 +3,7 @@ const {
   getProductController,
   getOneProductController,
   addProductController,
+  updateProductController,
 } = require("../controllers/productController");
 const { verifyToken, verifyTokenAdmin } = require("../middleware/verifyToken");
 
@@ -18,7 +19,7 @@ router.get("/find/:id", verifyToken, getOneProductController);
 // // CREATE Product || POST
 router.post("/add", verifyTokenAdmin, addProductController);
 
-// //LOGIN || POST
-// router.post("/login", loginController);
+// // UPDATE PRODUCT || POST
+router.put("/update/:id", verifyTokenAdmin, updateProductController);
 
 module.exports = router;
